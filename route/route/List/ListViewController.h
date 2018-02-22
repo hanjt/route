@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ListViewController.h
 //  route
 //
 //  Created by hanjiatong on 2018/2/22.
@@ -8,7 +8,6 @@
 
 #import "ROUBaseViewController.h"
 
-@interface ViewController : ROUBaseViewController
+@interface ListViewController : ROUBaseViewController
 
 @end
-

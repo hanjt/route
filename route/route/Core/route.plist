@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>/list</key>
-	<string>ViewController</string>
+	<string>ListViewController</string>
+	<key>/detail</key>
+	<string>DetailViewController</string>
 </dict>
 </plist>
