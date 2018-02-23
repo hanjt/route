@@ -10,6 +10,14 @@
 
 @interface ROUBaseViewController : UIViewController
 
-@property (nonatomic, copy) NSString *params;
+/**
+ url中的query
+ */
+@property (nonatomic, copy) NSString *paramsJSON;
+
+/**
+ url解析后的参数
+ */
+@property (nonatomic, copy, readonly) NSDictionary *paramsDic;
 
 @end

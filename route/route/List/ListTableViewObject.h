@@ -10,4 +10,6 @@
 
 @interface ListTableViewObject : NSObject <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, assign) int row;
+
 @end

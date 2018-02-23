@@ -11,6 +11,12 @@
 @interface ROUNavigator : NSObject
 
 + (ROUNavigator *)manager;
-- (UIViewController *)getTopViewController;
+
+/**
+ 得到根控制器
+
+ @return 返回根控制器
+ */
+- (UINavigationController *)rootViewController;
 
 @end

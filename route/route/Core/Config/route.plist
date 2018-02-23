@@ -6,5 +6,9 @@
 	<string>ListViewController</string>
 	<key>/detail</key>
 	<string>DetailViewController</string>
+	<key>/present</key>
+	<string>PresentViewController</string>
+	<key>/push</key>
+	<string>PushViewController</string>
 </dict>
 </plist>

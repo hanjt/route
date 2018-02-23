@@ -7,7 +7,9 @@
 //
 
 #import "DetailViewController.h"
-
+#import "ROUEntery.h"
+#import "ROUNavigator.h"
+#import "Configuration.h"
 @interface DetailViewController ()
 
 @end
@@ -17,6 +19,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (IBAction)presentOnClick:(UIButton *)sender {
+    UIViewController *vc = [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]];
+    [[[ROUNavigator manager] rootViewController] presentViewController:vc animated:YES completion:nil];
+}
+
+- (IBAction)pushOnClick:(UIButton *)sender {
+    UIViewController *vc = [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost]];
+    [[[ROUNavigator manager] rootViewController] pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

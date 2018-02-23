@@ -19,9 +19,13 @@
     return model;
 }
     
-- (UIViewController *)getTopViewController {
+- (UINavigationController *)rootViewController {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    return keyWindow.rootViewController;
+    if ([keyWindow.rootViewController isKindOfClass:[UINavigationController class]]) {
+        return (UINavigationController *)keyWindow.rootViewController;
+    }
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:keyWindow.rootViewController];
+    return nav;
 }
 
 @end

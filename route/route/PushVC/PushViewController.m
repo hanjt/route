@@ -1,26 +1,22 @@
 //
-//  ListViewController.m
+//  PushViewController.m
 //  route
 //
-//  Created by hanjiatong on 2018/2/22.
+//  Created by hanjiatong on 2018/2/23.
 //  Copyright © 2018年 hanjiatong. All rights reserved.
 //
 
-#import "ListViewController.h"
-//#import "ROUEntery.h"
-#import "ListTableViewObject.h"
-@interface ListViewController ()
+#import "PushViewController.h"
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet ListTableViewObject *tableDelegate;
+@interface PushViewController ()
 
 @end
 
-@implementation ListViewController
+@implementation PushViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableDelegate.row = ((NSNumber *)self.paramsDic[@"id"]).intValue;
+    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,11 +9,11 @@
 #import "ListTableViewObject.h"
 #import "ROUEntery.h"
 #import "ROUNavigator.h"
-
+#import "Configuration.h"
 @implementation ListTableViewObject
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.row;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -26,11 +26,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController *viewController = [ROUEntery enteryURL:@"route://first/detail"];
-    UIViewController *rootVC = [[ROUNavigator manager] getTopViewController];
-    if ([rootVC isKindOfClass:[UINavigationController class]]) {
-        [(UINavigationController *)rootVC pushViewController:viewController animated:YES];
-    }
+    UIViewController *viewController = [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/detail?id=1", projectScheme, projectHost]];
+    [[[ROUNavigator manager] rootViewController] pushViewController:viewController animated:YES];
 }
 
 @end

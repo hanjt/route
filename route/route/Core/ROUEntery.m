@@ -7,6 +7,7 @@
 //
 
 #import "ROUEntery.h"
+#import "Configuration.h"
 
 @implementation ROUEntery
 
@@ -19,6 +20,16 @@
 
     NSAssert(enteryURL.scheme.length, @"url scheme can not be nil");
     if (!enteryURL.scheme.length) {
+        return nil;
+    }
+    
+    NSAssert(projectScheme.length, @"project scheme can not be nil");
+    if (![enteryURL.scheme isEqualToString:projectScheme]) {
+        return nil;
+    }
+    
+    NSAssert(projectHost.length, @"project host can not be nil");
+    if (![enteryURL.host isEqualToString:projectHost]) {
         return nil;
     }
     
@@ -39,10 +50,11 @@
     }
     
     Class class = NSClassFromString(VCName);
+    NSAssert(class, @"vc is not exist");
     if (class) {
         id obj = [[class alloc] init];
-        if ([class instancesRespondToSelector:@selector(setParams:)]) {
-            [obj performSelector:@selector(setParams:) withObject:enteryURL.path];
+        if ([class instancesRespondToSelector:@selector(setParamsJSON:)]) {
+            [obj performSelector:@selector(setParamsJSON:) withObject:enteryURL.query];
             return obj;
         } else {
             return obj;

@@ -24,6 +24,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSDictionary *)paramsDic {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *param in [self.paramsJSON componentsSeparatedByString:@"&"]) {
+        NSArray *elts = [param componentsSeparatedByString:@"="];
+        if([elts count] < 2) continue;
+        if ([[elts lastObject] isKindOfClass:[NSString class]]) {
+            //如果是string需要进行utf8解码
+            [params setObject:[(NSString *)[elts lastObject] stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] forKey:[elts firstObject]];
+        } else {
+            [params setObject:[elts lastObject] forKey:[elts firstObject]];
+        }
+    }
+    return params;
+}
+
 /*
 #pragma mark - Navigation
 
