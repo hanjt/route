@@ -11,6 +11,8 @@
 
 @interface ROUBaseViewController : UIViewController
 
+@property (nonatomic, copy) NSString *url;
+
 /**
  url中的query
  */

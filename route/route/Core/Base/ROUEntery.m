@@ -8,62 +8,67 @@
 
 #import "ROUEntery.h"
 #import "Configuration.h"
+#import "ROUNavigator.h"
 
 @implementation ROUEntery
 
-+ (UIViewController *)enteryURL:(NSString *)url {
-    NSAssert(url.length, @"url can not be nil");
-    if (!url.length) {
-        return nil;
-    }
++ (void)enteryURL:(NSString *)url {
     NSURL *enteryURL = [NSURL URLWithString:url];
 
-    NSAssert(enteryURL.scheme.length, @"url scheme can not be nil");
-    if (!enteryURL.scheme.length) {
-        return nil;
+    if (![self checkURLParameter:enteryURL]) {
+        return ;
     }
     
-    NSAssert(projectScheme.length, @"project scheme can not be nil");
-    if (![enteryURL.scheme isEqualToString:projectScheme]) {
-        return nil;
-    }
-    
-    NSAssert(projectHost.length, @"project host can not be nil");
-    if (![enteryURL.host isEqualToString:projectHost]) {
-        return nil;
-    }
-    
-    NSAssert(enteryURL.host.length, @"url host can not be nil");
-    if (!enteryURL.host.length) {
-        return nil;
-    }
-    
-    NSAssert(enteryURL.path.length, @"url path can not be nil");
-    if (!enteryURL.path.length) {
-        return nil;
-    }
-    
-    NSString *VCName =  [self getVCNameFromURLPath:enteryURL.path];
-    NSAssert(VCName.length, @"vc name is invalid");
-    if (!VCName.length) {
-        return nil;
-    }
-    
-    Class class = NSClassFromString(VCName);
+    Class class = NSClassFromString([self getVCNameFromURLPath:enteryURL.path]);
     NSAssert(class, @"vc is not exist");
     if (class) {
         id obj = [[class alloc] init];
         if ([class instancesRespondToSelector:@selector(setParamsJSON:)]) {
             [obj performSelector:@selector(setParamsJSON:) withObject:enteryURL.query];
-            return obj;
-        } else {
-            return obj;
         }
-    } else {
-        return nil;
+        if ([obj isKindOfClass:[UIViewController class]]) {
+            if ([self presentToNextVCFromURLPath:enteryURL.path]) {
+                [[ROUNavigator manager].rootViewController presentViewController:obj animated:YES completion:nil];
+            } else {
+                [[ROUNavigator manager].rootViewController pushViewController:obj animated:YES];
+            }
+        }
     }
 }
 
++ (BOOL)checkURLParameter:(NSURL *)URL {
+    NSAssert(URL, @"url can not be nil");
+    if (!URL) {
+        return NO;
+    }
+    
+    NSAssert(URL.scheme.length, @"url scheme can not be nil");
+    if (!URL.scheme.length) {
+        return NO;
+    }
+    
+    NSAssert(projectScheme.length, @"project scheme can not be nil");
+    if (![URL.scheme isEqualToString:projectScheme]) {
+        return NO;
+    }
+    
+    NSAssert(projectHost.length, @"project host can not be nil");
+    if (![URL.host isEqualToString:projectHost]) {
+        return NO;
+    }
+    
+    NSAssert(URL.host.length, @"url host can not be nil");
+    if (!URL.host.length) {
+        return NO;
+    }
+    
+    NSAssert(URL.path.length, @"url path can not be nil");
+    if (!URL.path.length) {
+        return NO;
+    }
+    
+    return YES;
+}
 
 /**
  从url的path得到对应的vc
@@ -77,7 +82,46 @@
     }
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"route" ofType:@"plist"];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    return dic[path];
+    return dic[path][@"vc"];
+}
+
+
+/**
+ 是否以push方式跳转到下一个vc
+ 默认push方式
+ @return YES push方式
+         NO present方式
+ */
++ (BOOL)presentToNextVCFromURLPath:(NSString *)path {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"route" ofType:@"plist"];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    if ([dic[path][@"present"] isKindOfClass:[NSNumber class]]) {
+        return ((NSNumber *)dic[path][@"present"]).boolValue;
+    } else {
+        return dic[path][@"present"];
+    }
+}
+
++ (UIViewController *)getCurrentVCWithURL:(NSString *)url {
+    NSURL *enteryURL = [NSURL URLWithString:url];
+    
+    if (![self checkURLParameter:enteryURL]) {
+        return nil;
+    }
+    
+    Class class = NSClassFromString([self getVCNameFromURLPath:enteryURL.path]);
+    NSAssert(class, @"vc is not exist");
+    if (class) {
+        id obj = [[class alloc] init];
+        if ([class instancesRespondToSelector:@selector(setParamsJSON:)]) {
+            [obj performSelector:@selector(setParamsJSON:) withObject:enteryURL.query];
+            return obj;
+        } else {
+            return obj;
+        }
+    } else {
+        return nil;
+    }
 }
 
 @end

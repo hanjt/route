@@ -10,12 +10,22 @@
 
 @interface ROUEntery : NSObject
 
-/**
- 入口地址
 
- @param url 入口url
- @return 返回vc
+/**
+ 跳转到指定的vc
+
+ @param url 入口地址
  */
-+ (UIViewController *)enteryURL:(NSString *)url;
++ (void)enteryURL:(NSString *)url;
+
+
+/**
+ 根据url获得指定vc
+ 用于- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;中，用于解耦
+
+ @param url 入口地址
+ @return 指定vc
+ */
++ (UIViewController *)getCurrentVCWithURL:(NSString *)url;
 
 @end

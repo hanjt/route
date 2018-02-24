@@ -8,8 +8,8 @@
 
 #import "ListTableViewObject.h"
 #import "ROUEntery.h"
-#import "ROUNavigator.h"
 #import "Configuration.h"
+
 @implementation ListTableViewObject
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -26,8 +26,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController *viewController = [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/detail?id=1", projectScheme, projectHost]];
-    [[[ROUNavigator manager] rootViewController] pushViewController:viewController animated:YES];
+    [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/detail?id=1", projectScheme, projectHost]];
 }
 
 @end

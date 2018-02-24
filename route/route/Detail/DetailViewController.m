@@ -8,7 +8,6 @@
 
 #import "DetailViewController.h"
 #import "ROUEntery.h"
-#import "ROUNavigator.h"
 #import "Configuration.h"
 @interface DetailViewController ()
 
@@ -22,13 +21,11 @@
 }
 
 - (IBAction)presentOnClick:(UIButton *)sender {
-    UIViewController *vc = [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]];
-    [[[ROUNavigator manager] rootViewController] presentViewController:vc animated:YES completion:nil];
+    [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]];
 }
 
 - (IBAction)pushOnClick:(UIButton *)sender {
-    UIViewController *vc = [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost]];
-    [[[ROUNavigator manager] rootViewController] pushViewController:vc animated:YES];
+    [ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost]];
 }
 
 - (void)didReceiveMemoryWarning {
