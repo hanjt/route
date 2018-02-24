@@ -8,6 +8,8 @@
 
 #import "ListViewController.h"
 #import "ListTableViewObject.h"
+#import "NSURL+Addition.h"
+
 @interface ListViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -19,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableDelegate.row = ((NSNumber *)self.paramsDic[@"id"]).intValue;
+    self.tableDelegate.row = ((NSNumber *)[self.url paramsDic][@"id"]).intValue;
 }
 
 - (void)didReceiveMemoryWarning {

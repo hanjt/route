@@ -23,9 +23,12 @@
     NSAssert(class, @"vc is not exist");
     if (class) {
         id obj = [[class alloc] init];
-        if ([class instancesRespondToSelector:@selector(setParamsJSON:)]) {
-            [obj performSelector:@selector(setParamsJSON:) withObject:enteryURL.query];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+        if ([class instancesRespondToSelector:@selector(setUrl:)]) {
+            [obj performSelector:@selector(setUrl:) withObject:enteryURL];
         }
+#pragma clang diagnostic pop
         if ([obj isKindOfClass:[UIViewController class]]) {
             if ([self presentToNextVCFromURLPath:enteryURL.path]) {
                 [[ROUNavigator manager].rootViewController presentViewController:obj animated:YES completion:nil];
@@ -82,7 +85,7 @@
     }
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"route" ofType:@"plist"];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    return dic[path][@"vc"];
+    return dic[@"data"][path][@"vc"];
 }
 
 
@@ -95,10 +98,10 @@
 + (BOOL)presentToNextVCFromURLPath:(NSString *)path {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"route" ofType:@"plist"];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    if ([dic[path][@"present"] isKindOfClass:[NSNumber class]]) {
-        return ((NSNumber *)dic[path][@"present"]).boolValue;
+    if ([dic[@"data"][path][@"present"] isKindOfClass:[NSNumber class]]) {
+        return ((NSNumber *)dic[@"data"][path][@"present"]).boolValue;
     } else {
-        return dic[path][@"present"];
+        return dic[@"data"][path][@"present"];
     }
 }
 
@@ -113,12 +116,16 @@
     NSAssert(class, @"vc is not exist");
     if (class) {
         id obj = [[class alloc] init];
-        if ([class instancesRespondToSelector:@selector(setParamsJSON:)]) {
-            [obj performSelector:@selector(setParamsJSON:) withObject:enteryURL.query];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+                if ([class instancesRespondToSelector:@selector(setUrl:)]) {
+            [obj performSelector:@selector(setUrl:) withObject:enteryURL];
             return obj;
         } else {
             return obj;
         }
+#pragma clang diagnostic pop
+
     } else {
         return nil;
     }

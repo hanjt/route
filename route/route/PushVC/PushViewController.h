@@ -10,4 +10,6 @@
 
 @interface PushViewController : UIViewController
 
+@property (nonatomic, copy) NSURL *url;
+
 @end

@@ -6,8 +6,10 @@
 //  Copyright © 2018年 hanjiatong. All rights reserved.
 //
 
-#import "ROUBaseViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface ListViewController : ROUBaseViewController
+@interface ListViewController : UIViewController
+
+@property (nonatomic, copy) NSURL *url;
 
 @end

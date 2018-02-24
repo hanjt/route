@@ -1,5 +1,6 @@
 ##使用方式
 - 核心文件在Core文件夹中
+- Core/Utils中放置工具类
 
 - Core/Config中放置配置文件
  - route.plist结构说明如下<br>
@@ -29,7 +30,6 @@
 - Core/Base放置跟路由相关文件
  - ROUNavigator封装了导航相关文件
  - ROUEntery为viewController入口文件
- - ROUBaseViewController为所有类的父类，需要做路由跳转的类都需继承该类
  
 - 页面调转如下所示```[ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]];```
 
