@@ -9,13 +9,44 @@
 #import "ROUEntery.h"
 #import "Configuration.h"
 #import "ROUNavigator.h"
+#import "ROUBlankViewController.h"
+#import "ROUWebViewController.h"
+
+@interface ROUEntery()
+
+@property (nonatomic, strong) ROUBlankViewController *blankViewController;
+
+@end
 
 @implementation ROUEntery
 
-+ (void)enteryURL:(NSString *)url {
++ (ROUEntery *)manager {
+    static ROUEntery *manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[ROUEntery alloc] init];
+    });
+    return manager;
+}
+
+- (void)enteryURL:(NSString *)url {
     NSURL *enteryURL = [NSURL URLWithString:url];
 
+    //检测url是否合法
     if (![self checkURLParameter:enteryURL]) {
+        return ;
+    }
+    
+    //url是否可以跳转web页面
+    if ([self canOpenWebViewWithScheme:enteryURL.scheme]) {
+        ROUWebViewController *webViewController = [[ROUWebViewController alloc] init];
+        webViewController.url = enteryURL;
+        [[ROUNavigator manager].rootViewController pushViewController:webViewController animated:YES];
+        return ;
+    }
+    
+    //检测自定义的url是否符合配置
+    if (![self checkCustomURLParameter:enteryURL]) {
         return ;
     }
     
@@ -35,11 +66,22 @@
             } else {
                 [[ROUNavigator manager].rootViewController pushViewController:obj animated:YES];
             }
+        } else {
+            [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
         }
+    } else {
+        [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
     }
 }
 
-+ (BOOL)checkURLParameter:(NSURL *)URL {
+- (ROUBlankViewController *)blankViewController {
+    if (!_blankViewController) {
+        _blankViewController = [[ROUBlankViewController alloc] init];
+    }
+    return _blankViewController;
+}
+
+- (BOOL)checkURLParameter:(NSURL *)URL {
     NSAssert(URL, @"url can not be nil");
     if (!URL) {
         return NO;
@@ -50,6 +92,22 @@
         return NO;
     }
     
+    NSAssert(URL.host.length, @"url host can not be nil");
+    if (!URL.host.length) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+/**
+ 检测自定义的url合法性
+
+ @param URL url
+ @return 检测自定义的url合法性
+ */
+- (BOOL)checkCustomURLParameter:(NSURL *)URL {
     NSAssert(projectScheme.length, @"project scheme can not be nil");
     if (![URL.scheme isEqualToString:projectScheme]) {
         return NO;
@@ -59,17 +117,6 @@
     if (![URL.host isEqualToString:projectHost]) {
         return NO;
     }
-    
-    NSAssert(URL.host.length, @"url host can not be nil");
-    if (!URL.host.length) {
-        return NO;
-    }
-    
-    NSAssert(URL.path.length, @"url path can not be nil");
-    if (!URL.path.length) {
-        return NO;
-    }
-    
     return YES;
 }
 
@@ -79,7 +126,7 @@
  @param path url的path
  @return 对应的vc名字
  */
-+ (NSString *)getVCNameFromURLPath:(NSString *)path {
+- (NSString *)getVCNameFromURLPath:(NSString *)path {
     if (!path.length) {
         return @"";
     }
@@ -95,7 +142,7 @@
  @return YES push方式
          NO present方式
  */
-+ (BOOL)presentToNextVCFromURLPath:(NSString *)path {
+- (BOOL)presentToNextVCFromURLPath:(NSString *)path {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"route" ofType:@"plist"];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:filePath];
     if ([dic[@"data"][path][@"present"] isKindOfClass:[NSNumber class]]) {
@@ -105,10 +152,22 @@
     }
 }
 
-+ (UIViewController *)getCurrentVCWithURL:(NSString *)url {
+- (UIViewController *)getCurrentVCWithURL:(NSString *)url {
     NSURL *enteryURL = [NSURL URLWithString:url];
     
     if (![self checkURLParameter:enteryURL]) {
+        return nil;
+    }
+    
+    //url是否可以跳转web页面
+    if ([self canOpenWebViewWithScheme:enteryURL.scheme]) {
+        ROUWebViewController *webViewController = [[ROUWebViewController alloc] init];
+        webViewController.url = enteryURL;
+        return webViewController;
+    }
+    
+    //检测自定义的url是否符合配置
+    if (![self checkCustomURLParameter:enteryURL]) {
         return nil;
     }
     
@@ -129,6 +188,21 @@
     } else {
         return nil;
     }
+}
+
+
+/**
+ 根据scheme判断是否能跳转到webView
+
+ @param scheme URL的scheme
+ @return 是否可以打开webView
+ */
+- (BOOL)canOpenWebViewWithScheme:(NSString *)scheme {
+    if (!scheme.length) {
+        return NO;
+    }
+    NSArray *schemeList = @[@"http", @"https", @"ftp", @"mailto", @"file", @"data", @"irc"];
+    return [schemeList containsObject:scheme];
 }
 
 @end

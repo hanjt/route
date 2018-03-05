@@ -10,13 +10,14 @@
 
 @interface ROUEntery : NSObject
 
++ (ROUEntery *)manager;
 
 /**
  跳转到指定的vc
 
  @param url 入口地址
  */
-+ (void)enteryURL:(NSString *)url;
+- (void)enteryURL:(NSString *)url;
 
 
 /**
@@ -26,6 +27,6 @@
  @param url 入口地址
  @return 指定vc
  */
-+ (UIViewController *)getCurrentVCWithURL:(NSString *)url;
+- (UIViewController *)getCurrentVCWithURL:(NSString *)url;
 
 @end

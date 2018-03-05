@@ -3,7 +3,6 @@
 .DS_Store
 
 *.xcuserstate
-project.xcworkspace
 
 *.ipa
 *.dSYM.zip

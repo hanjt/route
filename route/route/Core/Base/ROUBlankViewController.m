@@ -1,31 +1,22 @@
 //
-//  DetailViewController.m
+//  ROUBlankViewController.m
 //  route
 //
-//  Created by hanjiatong on 2018/2/22.
+//  Created by hanjiatong on 2018/3/2.
 //  Copyright © 2018年 hanjiatong. All rights reserved.
 //
 
-#import "DetailViewController.h"
-#import "ROUEntery.h"
-#import "Configuration.h"
-@interface DetailViewController ()
+#import "ROUBlankViewController.h"
+
+@interface ROUBlankViewController ()
 
 @end
 
-@implementation DetailViewController
+@implementation ROUBlankViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-}
-
-- (IBAction)presentOnClick:(UIButton *)sender {
-    [[ROUEntery manager] enteryURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]];
-}
-
-- (IBAction)pushOnClick:(UIButton *)sender {
-    [[ROUEntery manager] enteryURL:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost]];
 }
 
 - (void)didReceiveMemoryWarning {

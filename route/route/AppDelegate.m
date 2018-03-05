@@ -19,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    UIViewController *viewController = [ROUEntery getCurrentVCWithURL:[NSString stringWithFormat:@"%@://%@/list?id=5", projectScheme, projectHost]];
+    UIViewController *viewController = [[ROUEntery manager] getCurrentVCWithURL:[NSString stringWithFormat:@"%@://%@/list?id=5", projectScheme, projectHost]];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:viewController];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];

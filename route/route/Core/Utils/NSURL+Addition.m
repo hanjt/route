@@ -15,7 +15,8 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:0];
     for (NSURLQueryItem *item in urlComponents.queryItems) {
         if (item.name.length > 0 && item.value) {
-            dic[item.name] = item.value;
+            //value需要进行utf8解码
+            dic[item.name] = [item.value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         }
     }
     return dic;
