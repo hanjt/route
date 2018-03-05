@@ -116,8 +116,6 @@
 			children = (
 				4E00D0D420414029003DEB78 /* ROUNavigator.h */,
 				4E00D0D320414029003DEB78 /* ROUNavigator.m */,
-				4E00D0D0204111A6003DEB78 /* ROUEntery.h */,
-				4E00D0CE204111A6003DEB78 /* ROUEntery.m */,
 				4ED1121620494D7C006E9C6A /* ROUBlankViewController.h */,
 				4ED1121720494D7C006E9C6A /* ROUBlankViewController.m */,
 				4ED1121820494D7C006E9C6A /* ROUBlankViewController.xib */,
@@ -126,6 +124,8 @@
 				4ED1121D20494FE4006E9C6A /* ROUWebViewController.xib */,
 				4E7FC8C2204D2ECB003BA09A /* ROURouter.h */,
 				4E7FC8C3204D2ECB003BA09A /* ROURouter.m */,
+				4E00D0D0204111A6003DEB78 /* ROUEntery.h */,
+				4E00D0CE204111A6003DEB78 /* ROUEntery.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";

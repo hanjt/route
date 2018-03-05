@@ -30,29 +30,24 @@
     return manager;
 }
 
-- (void)enteryViewControllerWithURL:(NSString *)url completion:(void (^ __nullable)(void))completion {
+- (void)openURL:(NSString *)url completion:(void (^ __nullable)(void))completion {
     NSURL *enterURL = [NSURL URLWithString:url];
     //url是否可以跳转web页面
     if ([self canOpenWebViewWithScheme:enterURL.scheme]) {
         self.webViewController.url = enterURL;
         [[ROUNavigator manager].rootViewController pushViewController:self.webViewController animated:YES];
-        return ;
-    }
-    
-    UIViewController *vc = [[ROURouter manager] enteryURL:url];
-    if (!vc) {
-        [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
-        return;
     } else {
-        if ([self presentToNextVCFromURLPath:enterURL.path]) {
-            [[ROUNavigator manager].rootViewController presentViewController:vc animated:YES completion:completion];
+        UIViewController *vc = [[ROURouter manager] openURL:url];
+        if (!vc) {
+            [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
         } else {
-            [[ROUNavigator manager].rootViewController pushViewController:vc animated:YES];
+            if ([self presentToNextVCFromURLPath:enterURL.path]) {
+                [[ROUNavigator manager].rootViewController presentViewController:vc animated:YES completion:completion];
+            } else {
+                [[ROUNavigator manager].rootViewController pushViewController:vc animated:YES];
+            }
         }
     }
-    
-    
-    
 }
 
 /**
@@ -86,7 +81,7 @@
 }
 
 - (UIViewController *)getNextVCWithURL:(NSString *)url {
-    return [[ROURouter manager] enteryURL:url];
+    return [[ROURouter manager] openURL:url];
 }
 
 #pragma mark set/get

@@ -27,6 +27,6 @@ typedef NS_ENUM(NSInteger, ROUEnterViewControllerType) {
  
  @param url 入口地址
  */
-- (UIViewController *)enteryURL:(NSString *)url;
+- (UIViewController *)openURL:(NSString *)url;
 
 @end

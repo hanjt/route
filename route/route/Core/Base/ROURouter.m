@@ -24,7 +24,7 @@
     return manager;
 }
 
-- (UIViewController *)enteryURL:(NSString *)url {
+- (UIViewController *)openURL:(NSString *)url {
     NSURL *enteryURL = [NSURL URLWithString:url];
     
     //检测url是否合法

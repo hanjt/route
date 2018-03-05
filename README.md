@@ -28,8 +28,12 @@
  	
  - Configuration.h中为scheme及host，这两个不能为空，且每个项目唯一scheme，scheme与info.plist中配置的scheme相同
 - Core/Base放置跟路由相关文件
- - ROUNavigator封装了导航相关文件
- - ROUEntery为viewController入口文件
+ - ROUNavigator：封装了导航相关文件
+ - ROURouter：路由
+ - ROUEntery：入口文件，处理ROURouter中返回的viewController
+ - ROUBlankViewController：空页面，url有误时候显示该页面
+ - ROUWebViewController：web页面，如果scheme为http、 https、 ftp、 mailto、 file、 data、 irc时显示该页面
  
-- 页面调转如下所示```[ROUEntery enteryURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]];```
+ 
+- 页面调转如下所示```[ROUEntery openURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost], completion:nil];```
 

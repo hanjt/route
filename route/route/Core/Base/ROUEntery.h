@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param url 入口地址
  @param completion 以present方式跳转给出完成回调，push方式跳转无效
  */
-- (void)enteryViewControllerWithURL:(NSString *)url completion:(void (^ __nullable)(void))completion;
+- (void)openURL:(NSString *)url completion:(void (^ __nullable)(void))completion;
 
 
 /**
