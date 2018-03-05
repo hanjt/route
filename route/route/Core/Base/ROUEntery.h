@@ -8,25 +8,35 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ROUEntery : NSObject
 
 + (ROUEntery *)manager;
 
 /**
  跳转到指定的vc
-
+ 
  @param url 入口地址
  */
-- (void)enteryURL:(NSString *)url;
+
+/**
+ 跳转到指定的vc
+
+ @param url 入口地址
+ @param completion 以present方式跳转给出完成回调，push方式跳转无效
+ */
+- (void)enteryViewControllerWithURL:(NSString *)url completion:(void (^ __nullable)(void))completion;
 
 
 /**
- 根据url获得指定vc
- 用于- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;中，用于解耦
+ 获得将要跳转的vc
 
  @param url 入口地址
- @return 指定vc
+ @return 返回将要跳转的vc
  */
-- (UIViewController *)getCurrentVCWithURL:(NSString *)url;
+- (UIViewController *)getNextVCWithURL:(NSString *)url;
 
 @end
+
+NS_ASSUME_NONNULL_END

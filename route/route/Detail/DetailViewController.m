@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "ROUEntery.h"
 #import "Configuration.h"
+
 @interface DetailViewController ()
 
 @end
@@ -21,11 +22,11 @@
 }
 
 - (IBAction)presentOnClick:(UIButton *)sender {
-    [[ROUEntery manager] enteryURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]];
+    [[ROUEntery manager] enteryViewControllerWithURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost] completion:nil];
 }
 
 - (IBAction)pushOnClick:(UIButton *)sender {
-    [[ROUEntery manager] enteryURL:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost]];
+    [[ROUEntery manager] enteryViewControllerWithURL:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost] completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

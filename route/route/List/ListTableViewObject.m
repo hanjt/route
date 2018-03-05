@@ -26,7 +26,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [[ROUEntery manager] enteryURL:[NSString stringWithFormat:@"%@://%@/detail?id=1", projectScheme, projectHost]];
+    [[ROUEntery manager] enteryViewControllerWithURL:[NSString stringWithFormat:@"%@://%@/detail?id=1", projectScheme, projectHost] completion:nil];
 }
 
 @end
