@@ -1,10 +1,8 @@
-##使用方式
+## 使用方式
 - 核心文件在Core文件夹中
 - Core/Utils中放置工具类
-
 - Core/Config中放置配置文件
- -  route.plist结构说明如下
- 
++ route.plist结构说明如下
  	 ```{    
  	 
  	 	"data": {  
