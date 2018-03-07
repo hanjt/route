@@ -26,7 +26,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [[ROUEntery manager] openURL:[NSString stringWithFormat:@"%@://%@/detail?id=1", projectScheme, projectHost] completion:nil];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/detail?id=1", projectScheme, projectHost]]];
 }
 
 @end

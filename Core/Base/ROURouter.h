@@ -17,6 +17,6 @@
  
  @param url 入口地址
  */
-- (UIViewController *)openURL:(NSString *)url;
+- (UIViewController *)openURL:(NSURL *)url;
 
 @end

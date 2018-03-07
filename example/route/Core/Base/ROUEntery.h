@@ -18,9 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
  跳转到指定的vc
 
  @param url 入口地址
- @param completion 以present方式跳转给出完成回调，push方式跳转无效
  */
-- (void)openURL:(NSString *)url completion:(void (^ __nullable)(void))completion;
+- (void)openURL:(NSURL *)url;
 
 
 /**
@@ -29,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param url 入口地址
  @return 返回将要跳转的vc
  */
-- (UIViewController *)getNextVCWithURL:(NSString *)url;
+- (UIViewController *)getNextVCWithURL:(NSURL *)url;
 
 @end
 

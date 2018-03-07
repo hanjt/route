@@ -30,19 +30,18 @@
     return manager;
 }
 
-- (void)openURL:(NSString *)url completion:(void (^ __nullable)(void))completion {
-    NSURL *enterURL = [NSURL URLWithString:url];
+- (void)openURL:(NSURL *)url {
     //url是否可以跳转web页面
-    if ([self canOpenWebViewWithScheme:enterURL.scheme]) {
-        self.webViewController.url = enterURL;
+    if ([self canOpenWebViewWithScheme:url.scheme]) {
+        self.webViewController.url = url;
         [[ROUNavigator manager].rootViewController pushViewController:self.webViewController animated:YES];
     } else {
         UIViewController *vc = [[ROURouter manager] openURL:url];
         if (!vc) {
             [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
         } else {
-            if ([self presentToNextVCFromURLPath:enterURL.path]) {
-                [[ROUNavigator manager].rootViewController presentViewController:vc animated:YES completion:completion];
+            if ([self presentToNextVCFromURLPath:url.path]) {
+                [[ROUNavigator manager].rootViewController presentViewController:vc animated:YES completion:nil];
             } else {
                 [[ROUNavigator manager].rootViewController pushViewController:vc animated:YES];
             }
@@ -60,7 +59,7 @@
     if (!scheme.length) {
         return NO;
     }
-    NSArray *schemeList = @[@"http", @"https", @"ftp", @"mailto", @"file", @"data", @"irc"];
+    NSArray *schemeList = @[@"http", @"https", @"ftp", @"mailto"];
     return [schemeList containsObject:scheme];
 }
 
@@ -80,7 +79,7 @@
     }
 }
 
-- (UIViewController *)getNextVCWithURL:(NSString *)url {
+- (UIViewController *)getNextVCWithURL:(NSURL *)url {
     return [[ROURouter manager] openURL:url];
 }
 

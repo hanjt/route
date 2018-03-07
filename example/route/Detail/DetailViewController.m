@@ -22,11 +22,11 @@
 }
 
 - (IBAction)presentOnClick:(UIButton *)sender {
-    [[ROUEntery manager] openURL:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost] completion:nil];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]]];
 }
 
 - (IBAction)pushOnClick:(UIButton *)sender {
-    [[ROUEntery manager] openURL:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost] completion:nil];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost]]];
 }
 
 - (void)didReceiveMemoryWarning {

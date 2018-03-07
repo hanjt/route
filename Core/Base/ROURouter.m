@@ -24,27 +24,24 @@
     return manager;
 }
 
-- (UIViewController *)openURL:(NSString *)url {
-    NSURL *enteryURL = [NSURL URLWithString:url];
-    
+- (UIViewController *)openURL:(NSURL *)url {
     //检测url是否合法
-    if (![self checkURLParameter:enteryURL]) {
+    if (![self checkURLParameter:url]) {
         return nil;
     }
     
     //检测自定义的url是否符合配置
-    if (![self checkCustomURLParameter:enteryURL]) {
+    if (![self checkCustomURLParameter:url]) {
         return nil;
     }
     
-    Class class = NSClassFromString([self getVCNameFromURLPath:enteryURL.path]);
-    NSAssert(class, @"vc is not exist");
+    Class class = NSClassFromString([self getVCNameFromURLPath:url.path]);
     if (class) {
         id obj = [[class alloc] init];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
         if ([class instancesRespondToSelector:@selector(setUrl:)]) {
-            [obj performSelector:@selector(setUrl:) withObject:enteryURL];
+            [obj performSelector:@selector(setUrl:) withObject:url];
         }
 #pragma clang diagnostic pop
         if ([obj isKindOfClass:[UIViewController class]]) {
@@ -58,17 +55,14 @@
 }
 
 - (BOOL)checkURLParameter:(NSURL *)URL {
-    NSAssert(URL, @"url can not be nil");
     if (!URL) {
         return NO;
     }
     
-    NSAssert(URL.scheme.length, @"url scheme can not be nil");
     if (!URL.scheme.length) {
         return NO;
     }
     
-    NSAssert(URL.host.length, @"url host can not be nil");
     if (!URL.host.length) {
         return NO;
     }
@@ -84,12 +78,10 @@
  @return 检测自定义的url合法性
  */
 - (BOOL)checkCustomURLParameter:(NSURL *)URL {
-    NSAssert(projectScheme.length, @"project scheme can not be nil");
     if (![URL.scheme isEqualToString:projectScheme]) {
         return NO;
     }
     
-    NSAssert(projectHost.length, @"project host can not be nil");
     if (![URL.host isEqualToString:projectHost]) {
         return NO;
     }

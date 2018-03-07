@@ -19,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    UIViewController *viewController = [[ROUEntery manager] getNextVCWithURL:[NSString stringWithFormat:@"%@://%@/list?id=5", projectScheme, projectHost]];
+    UIViewController *viewController = [[ROUEntery manager] getNextVCWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/list?id=5", projectScheme, projectHost]]];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:viewController];
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
@@ -56,17 +56,17 @@
 
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
-    [[ROUEntery manager] openURL:url.absoluteString completion:nil];
+    [[ROUEntery manager] openURL:url];
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url  {
-    [[ROUEntery manager] openURL:url.absoluteString completion:nil];
+    [[ROUEntery manager] openURL:url];
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation {
-    [[ROUEntery manager] openURL:url.absoluteString completion:nil];
+    [[ROUEntery manager] openURL:url];
     return YES;
 }
 
