@@ -16,12 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  跳转到指定的vc
- 
- @param url 入口地址
- */
-
-/**
- 跳转到指定的vc
 
  @param url 入口地址
  @param completion 以present方式跳转给出完成回调，push方式跳转无效

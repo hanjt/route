@@ -8,16 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- 进入的ViewController类型
- */
-typedef NS_ENUM(NSInteger, ROUEnterViewControllerType) {
-    ROUEnterViewControllerTypeBlank,        //空页面
-    ROUEnterViewControllerTypeWebView,      //webView
-    ROUEnterViewControllerTypeNormal        //正常页面
-    
-};
-
 @interface ROURouter : NSObject
 
 + (ROURouter *)manager;

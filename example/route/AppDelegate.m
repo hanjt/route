@@ -55,4 +55,19 @@
 }
 
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
+    [[ROUEntery manager] openURL:url.absoluteString completion:nil];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url  {
+    [[ROUEntery manager] openURL:url.absoluteString completion:nil];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation {
+    [[ROUEntery manager] openURL:url.absoluteString completion:nil];
+    return YES;
+}
+
 @end
