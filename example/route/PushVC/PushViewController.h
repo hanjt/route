@@ -5,6 +5,7 @@
 //  Created by hanjiatong on 2018/2/23.
 //  Copyright © 2018年 hanjiatong. All rights reserved.
 //
+//scheme://host/push
 
 #import <UIKit/UIKit.h>
 

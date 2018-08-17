@@ -8,6 +8,7 @@
 
 #import "ROUWebViewController.h"
 #import <WebKit/WebKit.h>
+#import "NSURL+Addition.h"
 
 @interface ROUWebViewController ()<WKUIDelegate, WKNavigationDelegate>
 
@@ -28,7 +29,7 @@
     self.webView.backgroundColor = [UIColor redColor];
     self.webView.UIDelegate = self;
     self.webView.navigationDelegate = self;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:self.url]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[self.url paramsDic][@"url"]]]];
     [self.view addSubview:self.webView];
 }
 
@@ -55,8 +56,6 @@
 }
 // 在收到响应后，决定是否跳转
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
-    
-    NSLog(@"%@",navigationResponse.response.URL.absoluteString);
     //允许跳转
     decisionHandler(WKNavigationResponsePolicyAllow);
     //不允许跳转
@@ -83,7 +82,6 @@
 }
 // 警告框
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
-    NSLog(@"%@",message);
     completionHandler();
 }
 

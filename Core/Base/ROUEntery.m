@@ -31,36 +31,16 @@
 }
 
 - (void)openURL:(NSURL *)url {
-    //url是否可以跳转web页面
-    if ([self canOpenWebViewWithScheme:url.scheme]) {
-        self.webViewController.url = url;
-        [[ROUNavigator manager].rootViewController pushViewController:self.webViewController animated:YES];
+    UIViewController *vc = [[ROURouter manager] openURL:url];
+    if (!vc) {
+        [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
     } else {
-        UIViewController *vc = [[ROURouter manager] openURL:url];
-        if (!vc) {
-            [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
+        if ([self presentToNextVCFromURLPath:url.path]) {
+            [[ROUNavigator manager].rootViewController presentViewController:vc animated:YES completion:nil];
         } else {
-            if ([self presentToNextVCFromURLPath:url.path]) {
-                [[ROUNavigator manager].rootViewController presentViewController:vc animated:YES completion:nil];
-            } else {
-                [[ROUNavigator manager].rootViewController pushViewController:vc animated:YES];
-            }
+            [[ROUNavigator manager].rootViewController pushViewController:vc animated:YES];
         }
     }
-}
-
-/**
- 根据scheme判断是否能跳转到webView
- 
- @param scheme URL的scheme
- @return 是否可以打开webView
- */
-- (BOOL)canOpenWebViewWithScheme:(NSString *)scheme {
-    if (!scheme.length) {
-        return NO;
-    }
-    NSArray *schemeList = @[@"http", @"https", @"ftp", @"mailto"];
-    return [schemeList containsObject:scheme];
 }
 
 /**

@@ -6,6 +6,7 @@
 //  Copyright © 2018年 hanjiatong. All rights reserved.
 //
 
+//scheme://host/webview?url=xxx
 #import <UIKit/UIKit.h>
 
 @interface ROUWebViewController : UIViewController
