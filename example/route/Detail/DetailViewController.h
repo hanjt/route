@@ -11,6 +11,6 @@
 
 @interface DetailViewController : UIViewController
 
-@property (nonatomic, copy) NSURL *url;
+@property (nonatomic, strong) NSURL *url;
 
 @end

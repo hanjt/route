@@ -26,7 +26,8 @@
 }
 
 - (IBAction)pushOnClick:(UIButton *)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/push", projectScheme, projectHost]]];
+    NSString *url = @"http%3a%2f%2fwww.peyesight.cn%2fmedial1%2findex.html%3fsmt_cp%3d110442%26smt_pl%3d2806189%26smt_md%3d4410";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/webview?url=%@", projectScheme, projectHost, url]]];
 }
 
 - (void)didReceiveMemoryWarning {
