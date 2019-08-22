@@ -30,25 +30,27 @@
     return manager;
 }
 
-- (void)openURL:(NSURL *)url {
+- (BOOL)openURL:(NSURL *)url {
     UIViewController *vc = [[ROURouter manager] openURL:url];
-    [self openViewController:vc url:url];
+    return [self openViewController:vc url:url];
 }
 
-- (void)openURL:(NSURL *)url resopnseBlock:(nonnull id)response {
+- (BOOL)openURL:(NSURL *)url resopnseBlock:(nonnull id)response {
     UIViewController *vc = [[ROURouter manager] openURL:url resopnseBlock:response];
-    [self openViewController:vc url:url];
+    return [self openViewController:vc url:url];
 }
 
-- (void)openViewController:(UIViewController *)viewController url:(NSURL *)url {
+- (BOOL)openViewController:(UIViewController *)viewController url:(NSURL *)url {
     if (!viewController) {
         [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
+        return NO;
     } else {
         if ([self presentToNextVCFromURLPath:url.path]) {
             [[ROUNavigator manager].rootViewController presentViewController:viewController animated:YES completion:nil];
         } else {
             [[ROUNavigator manager].rootViewController pushViewController:viewController animated:YES];
         }
+        return YES;
     }
 }
 

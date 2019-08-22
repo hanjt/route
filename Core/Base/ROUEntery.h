@@ -18,8 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
  跳转到指定的vc
 
  @param url 入口地址
+ @return 是否成功打开页面
  */
-- (void)openURL:(NSURL *)url;
+- (BOOL)openURL:(NSURL *)url;
 
 /**
  跳转到指定vc
@@ -27,8 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param url 入口地址
  @param response 回调，不指定数据格式，建议用json进行数据传递
+ @return 是否成功打开页面
  */
-- (void)openURL:(NSURL *)url resopnseBlock:(id)response;
+- (BOOL)openURL:(NSURL *)url resopnseBlock:(id)response;
 
 /**
  获得将要跳转的vc
