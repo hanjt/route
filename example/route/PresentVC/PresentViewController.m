@@ -20,6 +20,9 @@
 }
 
 - (IBAction)dismissOnClick:(UIButton *)sender {
+    if (self.resopnseBlock) {
+        self.resopnseBlock(@"我是回调");
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

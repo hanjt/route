@@ -54,6 +54,40 @@
     }
 }
 
+- (UIViewController *)openURL:(NSURL *)url resopnseBlock:(id)response {
+    //检测url是否合法
+    if (![self checkURLParameter:url]) {
+        return nil;
+    }
+    
+    //检测自定义的url是否符合配置
+    if (![self checkCustomURLParameter:url]) {
+        return nil;
+    }
+    
+    Class class = NSClassFromString([self getVCNameFromURLPath:url.path]);
+    if (class) {
+        id obj = [[class alloc] init];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+        if ([class instancesRespondToSelector:@selector(setUrl:)]) {
+            [obj performSelector:@selector(setUrl:) withObject:url];
+        }
+        if (response && [class instanceMethodForSelector:@selector(setResopnseBlock:)]) {
+            [obj performSelector:@selector(setResopnseBlock:) withObject:response];
+        }
+        
+#pragma clang diagnostic pop
+        if ([obj isKindOfClass:[UIViewController class]]) {
+            return obj;
+        } else {
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+}
+
 - (BOOL)checkURLParameter:(NSURL *)URL {
     if (!URL) {
         return NO;

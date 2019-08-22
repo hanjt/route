@@ -19,4 +19,12 @@
  */
 - (UIViewController *)openURL:(NSURL *)url;
 
+/**
+ 跳转到指定的vc
+
+ @param url 入口地址
+ @param response 回调，不指定数据格式，建议用json进行数据传递
+ */
+- (UIViewController *)openURL:(NSURL *)url resopnseBlock:(id)response;
+
 @end

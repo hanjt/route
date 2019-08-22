@@ -32,13 +32,22 @@
 
 - (void)openURL:(NSURL *)url {
     UIViewController *vc = [[ROURouter manager] openURL:url];
-    if (!vc) {
+    [self openViewController:vc url:url];
+}
+
+- (void)openURL:(NSURL *)url resopnseBlock:(nonnull id)response {
+    UIViewController *vc = [[ROURouter manager] openURL:url resopnseBlock:response];
+    [self openViewController:vc url:url];
+}
+
+- (void)openViewController:(UIViewController *)viewController url:(NSURL *)url {
+    if (!viewController) {
         [[ROUNavigator manager].rootViewController pushViewController:self.blankViewController animated:YES];
     } else {
         if ([self presentToNextVCFromURLPath:url.path]) {
-            [[ROUNavigator manager].rootViewController presentViewController:vc animated:YES completion:nil];
+            [[ROUNavigator manager].rootViewController presentViewController:viewController animated:YES completion:nil];
         } else {
-            [[ROUNavigator manager].rootViewController pushViewController:vc animated:YES];
+            [[ROUNavigator manager].rootViewController pushViewController:viewController animated:YES];
         }
     }
 }

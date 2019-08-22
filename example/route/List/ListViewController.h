@@ -12,5 +12,6 @@
 @interface ListViewController : UIViewController
 
 @property (nonatomic, strong) NSURL *url;
+@property (nonatomic, copy) void (^resopnseBlock)(id response);
 
 @end

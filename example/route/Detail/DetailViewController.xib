@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,7 +31,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xxg-4Q-Wwn">
-                    <rect key="frame" x="157" y="420" width="60" height="30"/>
+                    <rect key="frame" x="157.5" y="420" width="60" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="7yu-1F-o6J"/>
                         <constraint firstAttribute="height" constant="30" id="nb9-gh-FSU"/>
@@ -41,11 +41,20 @@
                         <action selector="pushOnClick:" destination="-1" eventType="touchUpInside" id="bsP-eo-q0b"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgO-bZ-gSz">
+                    <rect key="frame" x="118.5" y="318.5" width="138" height="30"/>
+                    <state key="normal" title="点我返回有回掉提示"/>
+                    <connections>
+                        <action selector="callbackTipOnClick:" destination="-1" eventType="touchUpInside" id="vWs-YR-KPr"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="MgO-bZ-gSz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="T7F-BH-YWs"/>
                 <constraint firstItem="Xxg-4Q-Wwn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hVP-N1-uCV"/>
                 <constraint firstItem="MNp-ch-hj6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="155" id="hYc-hW-fyR"/>
+                <constraint firstItem="MgO-bZ-gSz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ose-ih-aPZ"/>
                 <constraint firstItem="MNp-ch-hj6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="p1h-PP-B1g"/>
                 <constraint firstAttribute="bottom" secondItem="Xxg-4Q-Wwn" secondAttribute="bottom" constant="217" id="twV-5M-eFY"/>
             </constraints>

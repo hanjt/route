@@ -21,6 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)openURL:(NSURL *)url;
 
+/**
+ 跳转到指定vc
+ 如果vc跟上一级页面有数据传递用该方法
+ 
+ @param url 入口地址
+ @param response 回调，不指定数据格式，建议用json进行数据传递
+ */
+- (void)openURL:(NSURL *)url resopnseBlock:(id)response;
 
 /**
  获得将要跳转的vc

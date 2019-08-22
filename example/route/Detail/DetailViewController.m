@@ -30,6 +30,13 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/webview?url=%@", projectScheme, projectHost, url]]];
 }
 
+- (IBAction)callbackTipOnClick:(UIButton *)sender {
+    [[ROUEntery manager] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@://%@/present", projectScheme, projectHost]] resopnseBlock:^(id response){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"路由回调" message:[NSString stringWithFormat:@"%@", response] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
